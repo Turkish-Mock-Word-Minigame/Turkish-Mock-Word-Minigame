@@ -15,15 +15,20 @@ NOT_POSSIBLE_PATTERNS = [
 ]
 
 
+def get_word_pattern(word: str):
+    """Returns a vowel-consonant pattern (e.g. VVCC, CVCC) of a given string"""
+
+    pattern = ""
+    for char in word:
+        if char in C:
+            pattern += "C"
+        if char in V:
+            pattern += "V"
+    return pattern
+
+
 def is_valid_word(word: str) -> bool:
-    def get_word_pattern(word: str):
-        pattern = ""
-        for char in word:
-            if char in C:
-                pattern += "C"
-            if char in V:
-                pattern += "V"
-        return pattern
+    """Checks to see whether a given string is possible as a word in Turkish, returns True if it is."""
 
     if word in resources.unwanted_words:
         return False

@@ -14,6 +14,10 @@ cursor = _conn.cursor()
 
 
 def word_exists(word: str) -> bool:
+    """
+    Returns true if word exists in database.
+    """
+
     result = cursor.execute(
         """
         SELECT
@@ -30,6 +34,10 @@ def word_exists(word: str) -> bool:
 
 
 def get_closest_words(word: str, n: int = 3, min_dist: int = 2, max_dist: int = 4, min_len: int = 5) -> list:
+    """
+    Returns n closest words to word, by edit distance.
+    """
+
     result = cursor.execute(
         """
         SELECT
@@ -66,7 +74,9 @@ def get_closest_words(word: str, n: int = 3, min_dist: int = 2, max_dist: int = 
     return [word[0] for word in result] if result else []
 
 
-def get_sentence(word: str, limit: int = 3) -> str:
+def get_sentences(word: str, n: int = 3) -> list[str]:
+    """Returns n sentences that include the given word"""
+
     result = cursor.execute(
         """
         SELECT
@@ -78,7 +88,7 @@ def get_sentence(word: str, limit: int = 3) -> str:
         LIMIT
             :limit
         """,
-        {"param": word, "limit": limit}
+        {"param": word, "limit": n}
     ).fetchall()
 
     return [sentence[0] for sentence in result] if result else []
@@ -86,4 +96,4 @@ def get_sentence(word: str, limit: int = 3) -> str:
 
 if __name__ == "__main__":
     print(get_closest_words("sdgadsf"))
-    print(get_sentence("seçkin"))
+    print(get_sentences("seçkin"))

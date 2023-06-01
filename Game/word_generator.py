@@ -1,3 +1,4 @@
+import random
 from scipy.stats import multinomial
 from . import filter
 from . import db_wrapper
@@ -7,6 +8,11 @@ last_word = ""
 
 
 def __calculateNextGram(current_gram: tuple[str, str]) -> tuple[str, str]:
+    """
+    Returns the next gram based on the current gram and the
+    probabilities of the current gram.
+    """
+
     probable_characters = list(resources.ngram_pbs[current_gram].samples())
     ngram_probabilities = [resources.ngram_pbs[(current_gram)].prob(
         word) for word in probable_characters]
@@ -18,7 +24,11 @@ def __calculateNextGram(current_gram: tuple[str, str]) -> tuple[str, str]:
     return gram
 
 
-def generate_word(min_len: int = 5, max_len: int = 8):
+def generate_mock_word(min_len: int = 5, max_len: int = 8):
+    """
+    Returns a mock word between given lengths
+    """
+
     global last_word
 
     generated_ngram_word = ""
@@ -56,12 +66,15 @@ def generate_word(min_len: int = 5, max_len: int = 8):
 
 
 def get_real_word(word: str):
+    """
+    Returns the closest real word from the database
+    """
     return db_wrapper.get_closest_words(word)[0]
 
 
 def get_sentence(word: str):
-    return db_wrapper.get_sentence(word)[0]
+    """
+    Returns a sentence with the given word
+    """
 
-
-if __name__ == "__main__":
-    print(generate_word())
+    return random.choice(db_wrapper.get_sentences(word))
