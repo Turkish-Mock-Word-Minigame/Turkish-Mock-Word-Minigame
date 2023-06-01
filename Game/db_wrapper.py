@@ -92,8 +92,3 @@ def get_sentences(word: str, n: int = 3) -> list[str]:
     ).fetchall()
 
     return [sentence[0] for sentence in result] if result else []
-
-
-if __name__ == "__main__":
-    print(get_closest_words("sdgadsf"))
-    print(get_sentences("seçkin"))
