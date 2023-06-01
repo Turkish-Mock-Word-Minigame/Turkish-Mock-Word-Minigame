@@ -7,7 +7,7 @@ _conn = sqlite3.connect(
     os.path.join(absolute_path, "./data/sentences.db"))
 _conn.enable_load_extension(True)
 _conn.load_extension(
-    os.path.join(absolute_path, "./spellfix.dll"))
+    os.path.join(absolute_path, "spellfix"))
 _conn.enable_load_extension(False)
 
 cursor = _conn.cursor()
