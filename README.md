@@ -7,13 +7,13 @@ Turkish Mock Word Minigame is a gamified tool that aims to help Turkish learners
 ### 1. Docker
 
 i. Pull the docker image
-  ```
-  docker pull seckinu/turkish-mock-word-minigame
-  ```
+```
+docker pull seckinu/turkish-mock-word-minigame
+```
 
 ii. Run the image
 ```
-docker run -i seckinu/turkish-mock-word-minigame
+docker run -i -t seckinu/turkish-mock-word-minigame
 ```
 
 ### 2. Github + drive
